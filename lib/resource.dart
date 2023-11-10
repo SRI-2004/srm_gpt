@@ -10,9 +10,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-
-class NotesPage extends StatelessWidget {
-  const NotesPage({super.key});
+class Resource extends StatelessWidget {
+  const Resource({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +21,20 @@ class NotesPage extends StatelessWidget {
       ),
       home: Scaffold(
         body: ListView(children: [
-          Home(),
+          Resources(),
         ]),
       ),
     );
   }
 }
 
-class Home extends StatefulWidget {
+class Resources extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
-
+  _ResourcesState createState() => _ResourcesState();
 }
 
-class _HomeState extends State<Home> {
+class _ResourcesState extends State<Resources> {
+  bool isMenuOpen = false;
   String cardText = 'Type to start chatting';
   TextEditingController textEditingController = TextEditingController();
   String? explanationOutput; // Variable to store the output
@@ -65,30 +64,24 @@ class _HomeState extends State<Home> {
       cardText = chatHistory.join('');
     });
   }
-  void _navigateToSpecificPage(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage()),
-          (Route<dynamic> route) => false,
-    );
+
+  void closeWindow() {
+    // Toggle the isMenuOpen state to close the window
+    setState(() {
+      isMenuOpen = false;
+    });
   }
-
-// Use this method when the back button is pressed
-  void _onBackPressed(BuildContext context) {
-    _navigateToSpecificPage(context);
+  void toggleStatus(){
+    setState(() {
+      isMenuOpen = true;
+    });
   }
-
-
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        _onBackPressed(context);
-        return false; // Return false to prevent the default back button behavior
-      },
-      child:Column(
+    return Column(
       children: [
+        // Sliding Icon Button
+
         Container(
           width: 390,
           height: 844,
@@ -96,6 +89,7 @@ class _HomeState extends State<Home> {
           decoration: BoxDecoration(color: Color(0xFFF7F7F7)),
           child: Stack(
             children: [
+
               Positioned(
                 left: 0,
                 top: 764,
@@ -135,7 +129,7 @@ class _HomeState extends State<Home> {
                       ),
                       IconButton(
                         icon: Icon(Icons.note), // Replace with the second icon you want
-                        color : Colors.blue,
+                        color: Colors.grey,
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -159,23 +153,26 @@ class _HomeState extends State<Home> {
                         icon: Icon(Icons.person), // Replace with the fourth icon you want
                         color: Colors.grey,
                         onPressed: () {
-                          // Add your functionality for the fourth button here
-
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => Resource(),
+                            ),
+                          );
                         },
                       ),
                     ],
                   ),
                 ),
               ),
+
               Positioned(
                 left: 10,
-                top: 16,
-                right:10,
+                top: 40,
+                right: 10,
                 child: Container(
-                  
                   height: 149,
                   decoration: ShapeDecoration(
-                    color: Color(0xFF9A83F4),
+                    color: Color(0xff9a83f4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -184,12 +181,12 @@ class _HomeState extends State<Home> {
               ),
               Positioned(
                 left: 29,
-                top: 40,
+                top: 74,
                 child: SizedBox(
                   width: 177,
                   height: 105,
                   child: Text(
-                    'Chat with AI',
+                    'Resources',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 30,
@@ -200,39 +197,16 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              Positioned(
-                left: 223,
-                top: 679,
-                child: Container(
-                  width: 53,
-                  height: 53,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Container(
-                          width: 53,
-                          height: 53,
-                          decoration: ShapeDecoration(
-                            color: Color(0x28A995FA),
-                            shape: OvalBorder(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+
               Positioned(
                 left: 178,
-                top: 0,
+                top: 20,
                 child: Container(
                   width: 215,
                   height: 215,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("images/8.png"),
+                      image: AssetImage("images/4.png"),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -240,63 +214,65 @@ class _HomeState extends State<Home> {
               ),
               Positioned(
                 left: 10,
-                top: 673,
+                top: 683,
                 right: 10,
                 child: Row(
-                  children: [
-                    Container(
-                      width: 340,
-                      height: 54,
-                      decoration: ShapeDecoration(
-                        color: Color(0xFF796FE1).withOpacity(0.8),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    children: [
+                      Container(
+                        width: 340,
+                        height: 54,
+                        decoration: ShapeDecoration(
+                          color: Color(0xff9a83f4).withOpacity(0.2),
+
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Color(0xff9a83f4)),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
-                      ),
 
-                    child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: textEditingController,
-                              decoration: InputDecoration(
-
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  borderSide: BorderSide(width: 5, color: Colors.white)
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: textEditingController,
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      borderSide: BorderSide(width: 10, color: Colors.black)
+                                  ),
+                                  hintText: 'Enter text',
+                                  hintStyle: TextStyle(color: Color(0xff9a83f4)),
                                 ),
-                                hintText: 'Enter text',
+                                style: TextStyle(color: Color(0xff9a83f4)),
                               ),
                             ),
-                          ),
-                          SizedBox(width: 10),
-                          ElevatedButton(
-                            onPressed: () {
-                              fetchExplanation();
-                          },
-                            child: Icon(Icons.send),
-                            style: ElevatedButton.styleFrom(
-                              // primary: Colors.white,
-                              // onPrimary: Colors.black,
-                              shape: CircleBorder(),
+                            SizedBox(width: 10),
+                            ElevatedButton(
+                              onPressed: () {
+                                fetchExplanation();
+                              },
+                              child: Icon(Icons.send_sharp),
+                              style: ElevatedButton.styleFrom(
+                                // primary: Colors.white,
+                                // onPrimary: Colors.black,
+                                  backgroundColor: Color(0xff9a83f4).withOpacity(0.7),
+                                  shape: CircleBorder(),
+                                  fixedSize: Size(30, 30)
+                              ),
                             ),
-                          ),
-                        ],
-                    ),
-                    ),
-                  ]
+                          ],
+                        ),
+                      ),
+                    ]
                 ),
-        ),
-
-
-
+              ),
               Positioned(
                 left: 20,
-                top: 205,
-                right:20,
+                top: 220,
+                right: 20,
                 child: Container(
                   width: 260,
-                  height: 455,
+                  height: 450,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey, width: 0),
                   ),
@@ -313,7 +289,7 @@ class _HomeState extends State<Home> {
                             margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                             padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: isUserInput ? Color(0xFF796FE1) : Color(0xFF796FE1).withOpacity(0.7),
+                              color: isUserInput ? Color(0xff9a83f4) : Color(0xff9a83f4).withOpacity(0.7),
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(12),
                                 topRight: Radius.circular(12),
@@ -335,11 +311,24 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
+
+              Positioned(
+                top: 0, // Adjust the top value to position the button
+                left: 10, // Adjust the right value to position the button
+                child: IconButton(
+                  color: Colors.black,
+                  icon: Icon(Icons.menu),
+                  onPressed: toggleStatus,
+                ),
+              ),
+              SlidingWindow(
+                  isMenuOpen: isMenuOpen,
+                onClosePressed: closeWindow,
+              ),
             ],
           ),
         ),
       ],
-    )
     );
   }
 }
@@ -349,7 +338,7 @@ Future<String?> getExplanation(String text) async {
   int randomInt = Random().nextInt(99999);
   try {
     String jsonBody = json.encode({
-      'type': 'chat_with_me',
+      'type': 'extra_info',
       'text': text,
       'id':randomInt,
     });
@@ -379,3 +368,4 @@ Future<String?> getExplanation(String text) async {
     return null;
   }
 }
+

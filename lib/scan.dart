@@ -1,12 +1,27 @@
+import 'dart:convert';
+import 'dart:math';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:srm_gpt/main.dart';
+import 'package:srm_gpt/flashcard.dart';
 import 'package:srm_gpt/notes.dart';
 
-void main() {
-  runApp(const ScanPage());
+import 'package:srm_gpt/camera.dart';
+import 'package:srm_gpt/Home.dart';
+class ScanPage extends StatefulWidget {
+  const ScanPage({Key? key}) : super(key: key);
+
+  @override
+  _ScanPageState createState() => _ScanPageState();
 }
-class ScanPage extends StatelessWidget {
-  const ScanPage({super.key});
+
+class _ScanPageState extends State<ScanPage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,15 +30,21 @@ class ScanPage extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromARGB(255, 18, 32, 47),
       ),
       home: Scaffold(
-        body: ListView(children: [
-          Home(),
-        ]),
+        body: ListView(
+          children: [
+            Home(),
+          ],
+        ),
       ),
     );
   }
 }
 
 class Home extends StatelessWidget {
+
+
+  const Home({ Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -98,7 +119,11 @@ class Home extends StatelessWidget {
                         icon: Icon(Icons.person), // Replace with the fourth icon you want
                         color: Colors.grey,
                         onPressed: () {
-                          // Add your functionality for the fourth button here
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => FlashCard(),
+                            ),
+                          );
 
                         },
                       ),
@@ -109,8 +134,8 @@ class Home extends StatelessWidget {
               Positioned(
                 left: 10,
                 top: 16,
+                right: 10,
                 child: Container(
-                  width: 369,
                   height: 149,
                   decoration: ShapeDecoration(
                     color: Color(0xFF9A83F4),
@@ -177,7 +202,7 @@ class Home extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: 77,
+                left: 67,
                 top: 673,
                 child: Container(
                   width: 235,
@@ -191,11 +216,26 @@ class Home extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: 144,
+                left: 134,
                 top: 683,
                 child: SizedBox(
                   width: 101,
                   height: 34,
+                  child: ElevatedButton(
+                    onPressed: ()  {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                      );// Place the function you want to execute when the button is pressed here
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF796FE1),// Button background color
+                      elevation: 0, // Button elevation (shadow)
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(0), // Button border radius
+                      ),
+                    ),
                   child: Text(
                     'Scan now',
                     style: TextStyle(
@@ -207,6 +247,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ),
+              ),
               ),
               Positioned(
                 left: 45,
@@ -251,3 +292,5 @@ class Home extends StatelessWidget {
     );
   }
 }
+
+
