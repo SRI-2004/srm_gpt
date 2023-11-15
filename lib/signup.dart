@@ -44,7 +44,7 @@ class _SignUpState extends State<SignUp> {
 
 // ... Your existing code ...
   void signUp() async {
-    final String apiUrl = "http://192.168.155.96:8000/signup/";
+    final String apiUrl = "http://192.168.221.96:8000/signup/";
 
     // Get user details from controllers
     String username = fullNameController.text;

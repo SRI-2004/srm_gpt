@@ -9,6 +9,7 @@ import 'package:srm_gpt/notes.dart';
 
 import 'package:srm_gpt/camera.dart';
 import 'package:srm_gpt/Home.dart';
+import 'package:srm_gpt/upload.dart';
 class ScanPage extends StatefulWidget {
   const ScanPage({Key? key}) : super(key: key);
 
@@ -163,30 +164,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
-              Positioned(
-                left: 223,
-                top: 679,
-                child: Container(
-                  width: 53,
-                  height: 53,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Container(
-                          width: 53,
-                          height: 53,
-                          decoration: ShapeDecoration(
-                            color: Color(0x28A995FA),
-                            shape: OvalBorder(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+
               Positioned(
                 left: 178,
                 top: 0,
@@ -202,38 +180,26 @@ class Home extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: 67,
-                top: 673,
-                child: Container(
-                  width: 235,
-                  height: 54,
-                  decoration: ShapeDecoration(
-                    color: Color(0xFF796FE1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 134,
+                left: 20,
                 top: 683,
                 child: SizedBox(
-                  width: 101,
-                  height: 34,
+                  width: 150,
+                  height: 45,
                   child: ElevatedButton(
                     onPressed: ()  {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => HomePage(),
+                          builder: (context) => Camera(),
                         ),
-                      );// Place the function you want to execute when the button is pressed here
+                      );
+
+                      // Place the function you want to execute when the button is pressed here
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF796FE1),// Button background color
                       elevation: 0, // Button elevation (shadow)
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(0), // Button border radius
+                        borderRadius: BorderRadius.circular(10), // Button border radius
                       ),
                     ),
                   child: Text(
@@ -248,6 +214,44 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
+
+              ),
+              Positioned(
+                left: 200,
+                top: 683,
+                child: SizedBox(
+                  width: 150,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: ()  {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => UploadPage(),
+                        ),
+                      );
+
+                      // Place the function you want to execute when the button is pressed here
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF796FE1),// Button background color
+                      elevation: 0, // Button elevation (shadow)
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10), // Button border radius
+                      ),
+                    ),
+                    child: Text(
+                      'Upload',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 23,
+                        fontFamily: 'SF Pro Display',
+                        fontWeight: FontWeight.w500,
+                        height: 0,
+                      ),
+                    ),
+                  ),
+                ),
+
               ),
               Positioned(
                 left: 45,

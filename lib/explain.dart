@@ -338,7 +338,7 @@ class _ExplainsState extends State<Explains> {
 
 
 Future<String?> getExplanation(String text) async {
-  final String apiUrl = "http://192.168.155.96:8000/process/";
+  final String apiUrl = "http://192.168.221.96:8000/process/";
   int randomInt = Random().nextInt(99999);
   try {
     String jsonBody = json.encode({

@@ -39,7 +39,7 @@ class Login extends StatelessWidget {
   Login({super.key});// Import the package for JSON encoding/decoding
 
   void login(BuildContext context) async {
-    final String apiUrl = "http://192.168.155.96:8000/login/";
+    final String apiUrl = "http://192.168.221.96:8000/login/";
 
     // Get user details from controllers
     String username = userIdController.text;
